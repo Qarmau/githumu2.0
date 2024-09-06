@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>theEagles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2; /* Updated to match the first snippet */
+            --secondary-color: #f5f5f5; /* Updated to match the first snippet */
+            --text-color: #333; /* Matching the first snippet */
+            --background-color: #ffffff; /* Matching the first snippet */
+            --shadow-color: rgba(0, 0, 0, 0.15); /* This can remain for shadow effects */
+            --transition-speed: 0.4s;
+            --nav-footer-text-color: #ffffff; /* Added from the first snippet */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .background-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity var(--transition-speed) ease;
+            opacity: 0;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static "images/luxury_campus.jpg" %}') no-repeat center center;
+            background-size: cover;
+            color: var(--nav-footer-text-color); /* Updated to match the first snippet */
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            margin: -100vh auto 0;
+            padding: 20px;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            transform: translateY(0);
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: var(--nav-footer-text-color); /* Updated to match the first snippet */
+            padding: 40px 30px;
+            text-align: center;
+            font-size: clamp(28px, 6vw, 42px);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 300%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: translateX(-50%);
+            opacity: 0.4;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .header:hover::before {
+            opacity: 0.1;
+        }
+
+        .content {
+            padding: 50px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .school-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+            color: var(--primary-color);
+        }
+
+        .school-spirit {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .option-link {
+            text-decoration: none;
+            color: var(--nav-footer-text-color); /* Updated to match the first snippet */
+            background-color: var(--primary-color);
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .option-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .option-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left var(--transition-speed) ease;
+            transform: translateY(-50%);
+        }
+
+        .option-link:hover::before {
+            left: 100%;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-25px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .option-link {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-images">
+        {% for bg_image in background_images %}
+            <img src="{{ bg_image.image.url }}" alt="Background" class="background-image" {% if forloop.first %}style="opacity: 1;"{% endif %}>
+        {% endfor %}
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Githumu High School</h1>
+            <p>Empowering Futures Through Excellence</p>
+            <a href="#get-started" class="cta-button">Get Started</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">Githumu High School</div>
+        <div class="content">
+            <div class="school-icon">🦅</div>
+            <div class="school-spirit">Like an Eagle, We Soar!</div>
+            <div class="options">
+                <a href="{% url 'login' %}" class="option-link">
+                    <span>Teachers</span>
+                </a>
+                <a href="{% url 'academics' %}" class="option-link">
+                    <span>Students</span>
+                </a>
+                <a href="https://githumuhigh.pythonanywhere.com/admin/" class="option-link">
+                    <span>Admin</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backgroundImages = document.querySelectorAll('.background-image');
+            let currentIndex = 0;
+
+            function changeBackground() {
+                backgroundImages[currentIndex].style.opacity = '0';
+                currentIndex = (currentIndex + 1) % backgroundImages.length;
+                backgroundImages[currentIndex].style.opacity = '1';
+            }
+
+            setInterval(changeBackground, 10000); // Change every 10 seconds
+        });
+    </script>
+</body>
+</html>

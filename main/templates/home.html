@@ -1,0 +1,372 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Githumu High School - Where Excellence Thrives{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<style>
+    :root {
+        --primary-color: #1a237e;
+        --secondary-color: #ffd700;
+        --text-color: #333;
+        --background-color: #f8f9fa;
+        --border-radius: 12px;
+        --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+        font-family: 'Playfair Display', serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .hero-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static "images/luxury_campus.jpeg" %}') no-repeat center center;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 100px;
+        height: 3px;
+        background-color: var(--secondary-color);
+        margin: 10px auto 0;
+    }
+
+    /* Upcoming Events Section */
+    .event-slider {
+        position: relative;
+        max-width: 100%;
+    }
+
+    .event-slide {
+        background-color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        display: none;
+    }
+
+    .event-slide.slick-active {
+        display: block;
+    }
+
+
+
+    .event-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .event-details {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .event-date {
+        font-size: 1rem;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .event-title {
+        font-size: 1.75rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .event-description {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #555;
+    }
+
+    .event-link {
+        padding: 0.5rem 1rem;
+        background-color: var(--primary-color);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .event-link:hover {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .event-image {
+            height: 150px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+        }
+
+        .event-description {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Latest News Section */
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .news-item {
+        background-color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .news-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .news-image {
+        width: 100%;
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .news-content {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .news-date {
+        font-size: 1rem;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .news-title {
+        font-size: 1.75rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .news-excerpt {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #555;
+    }
+
+    .news-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--primary-color);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .news-link:hover {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .news-image {
+            height: 150px;
+        }
+
+        .news-title {
+            font-size: 1.5rem;
+        }
+
+        .news-excerpt {
+            font-size: 0.9rem;
+        }
+    }
+
+    #back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    #back-to-top:hover {
+        background-color: var(--secondary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 data-aos="fade-up">Welcome to Githumu High School</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Where Excellence Meets Opportunity</p>
+        <a href="{% url 'achievements' %}" class="cta-button" data-aos="fade-up" data-aos-delay="400">Explore Our Achievements</a>
+    </div>
+</section>
+
+<div id="upcoming-events" class="section py-5">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Upcoming Events</h2>
+        <div class="event-slider">
+            {% for event in events %}
+            <div class="event-slide">
+                <div class="event-image" style="background-image: url('{{ event.image.url }}');"></div>
+                <div class="event-details">
+                    <p class="event-date">{{ event.date|date:"F d, Y" }}</p>
+                    <h3 class="event-title">{{ event.title }}</h3>
+                    <p class="event-description">{{ event.description|truncatewords:10 }}</p>
+                    <a href="{% url 'event_detail' event.id %}" class="event-link">Learn More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<section id="news" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Latest News</h2>
+        <div class="news-grid">
+            {% for item in news %}
+            <div class="news-item" data-aos="fade-up" data-aos-delay="{% cycle 100 200 300 400 500 %}">
+                <div class="news-image" style="background-image: url('{{ item.image.url }}');"></div>
+                <div class="news-content">
+                    <p class="news-date">{{ item.date|date:"F d, Y" }}</p>
+                    <h3 class="news-title">{{ item.title }}</h3>
+                    <p class="news-excerpt">{{ item.content|truncatewords:10 }}</p>
+                    <a href="{% url 'news_detail' item.id %}" class="news-link">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="calendar" class="py-5">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Calendar of Events</h2>
+        <div id="calendar-container" data-aos="fade-up" data-aos-delay="200"></div>
+    </div>
+</section>
+
+<a href="#" id="back-to-top">↑</a>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        $('.event-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 10000,
+            fade: true,
+            cssEase: 'linear',
+            adaptiveHeight: true,
+            arrows: false,
+            dots: true,
+        });
+
+        var calendarEl = document.getElementById('calendar-container');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+                {% for event in calendar_events %}
+                {
+                    title: '{{ event.title }}',
+                    start: '{{ event.date|date:"Y-m-d" }}'
+                },
+                {% endfor %}
+            ],
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+            }
+        });
+        calendar.render();
+
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 200) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+</script>
+{% endblock %}

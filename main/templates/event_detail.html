@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Lato', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #6a9fb5, #3b4c58);
+        color: #ffffff;
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .event-detail {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .event-info {
+        flex: 1 1 60%;
+    }
+
+    .event-date {
+        font-size: 16px;
+        color: #888;
+        margin-bottom: 10px;
+    }
+
+    .event-description {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #555;
+    }
+
+    .event-media {
+        flex: 1 1 35%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .event-image {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .event-image:hover {
+        transform: scale(1.05);
+    }
+
+    .event-video {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="page-header">
+    <h1>{{ event.title }}</h1>
+</div>
+
+<div class="container">
+    <div class="event-detail">
+        <div class="event-info">
+            <p class="event-date"><i class="far fa-calendar-alt"></i> {{ event.date|date:"F d, Y" }}</p>
+            <div class="event-description">
+                {{ event.description|linebreaks }}
+            </div>
+        </div>
+        <div class="event-media">
+            {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
+            {% endif %}
+            {% if event.video_url %}
+                <video controls class="event-video">
+                    <source src="{{ event.video_url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const newsItems = document.querySelectorAll('.news-list li');
+
+        newsItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                item.style.transform = "translateY(-10px)";
+                item.style.boxShadow = "0 16px 40px rgba(0, 0, 0, 0.25)";
+            });
+
+            item.addEventListener('mouseleave', function() {
+                item.style.transform = "translateY(0)";
+                item.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.2)";
+            });
+        });
+
+        const eventImages = document.querySelectorAll('.event-image');
+
+        eventImages.forEach(image => {
+            image.addEventListener('mouseenter', function() {
+                image.style.transform = "scale(1.08)";
+            });
+
+            image.addEventListener('mouseleave', function() {
+                image.style.transform = "scale(1)";
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}

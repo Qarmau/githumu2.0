@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Revision Material</title>
+    <!-- Link to Google Fonts for 'San Francisco' -->
+    <link href="https://fonts.googleapis.com/css2?family=San+Francisco:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'San Francisco', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f1f6;
+            color: #333;
+        }
+
+        /* Container for form */
+        .upload-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1d1d1f;
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #1d1d1f;
+        }
+
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        button[type="submit"] {
+            background: #007aff; /* Apple blue */
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center;
+        }
+
+        button[type="submit"]:hover {
+            background: #0051a2; /* Darker Apple blue */
+            transform: translateY(-2px);
+        }
+
+        .file-drop-area {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            padding: 1rem;
+            border: 2px dashed #dcdcdc;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            background-color: #f9f9f9;
+        }
+
+        .file-drop-area.is-active {
+            background-color: rgba(0, 122, 255, 0.1); /* Light Apple blue */
+            border-color: rgba(0, 122, 255, 0.3);
+        }
+
+        .fake-btn {
+            flex-shrink: 0;
+            background-color: rgba(0, 122, 255, 0.1);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-right: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #007aff;
+        }
+
+        .file-msg {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #666;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .upload-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button[type="submit"] {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Upload Revision Material</h1>
+        <form method="post" enctype="multipart/form-data" id="uploadForm">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.name == 'file' %}
+                        <div class="file-drop-area">
+
+
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.querySelector('input[type="file"]');
+        const fileDropArea = document.querySelector('.file-drop-area');
+        const fileMsg = fileDropArea.querySelector('.file-msg');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, () => {
+                fileDropArea.classList.add('is-active');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, () => {
+                fileDropArea.classList.remove('is-active');
+            }, false);
+        });
+
+        fileDropArea.addEventListener('drop', handleDrop, false);
+        fileInput.addEventListener('change', updateFileMessage, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+            updateFileMessage();
+        }
+
+        function updateFileMessage() {
+            const files = fileInput.files;
+            if (files.length > 0) {
+                fileMsg.textContent = files.length === 1 ? files[0].name : `${files.length} files selected`;
+            } else {
+                fileMsg.textContent = 'or drag and drop files here';
+            }
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Holiday Assignment</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #c9302c;
+            --white: #ffffff;
+            --light-gray: #f1f1f1;
+            --text-color: #333333;
+            --error-color: #ff0000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+        }
+
+        /* Delete Holiday Assignment Page Styles */
+        .delete-assignment-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--light-gray);
+        }
+
+        .delete-assignment-container h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .delete-assignment-container p {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .delete-assignment-container form {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .delete-assignment-container button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .delete-assignment-container button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .delete-assignment-container button:active {
+            background-color: var(--secondary-color);
+            transform: translateY(0);
+        }
+
+        .delete-assignment-container a {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            padding: 14px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .delete-assignment-container a:hover {
+            background-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .delete-assignment-container a:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-assignment-container">
+        <h1>Delete Holiday Assignment</h1>
+        <p>Are you sure you want to delete the assignment:form "{{ assignment.grade }} {{ assignment.subject }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+            <a href="{% url 'holiday_assignment_list' %}">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

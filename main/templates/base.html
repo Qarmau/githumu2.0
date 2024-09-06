@@ -1,0 +1,483 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Githumu High School{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+ <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #f8f9fa;
+            --text-color: #212529;
+            --background-color: #ffffff;
+            --nav-footer-text-color: #ffffff;
+            --hover-bg-color: rgba(255, 255, 255, 0.15);
+            --transition-speed: 0.3s;
+            --border-radius: 8px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.scrolled {
+            background-color: rgba(26, 115, 232, 0.9);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-logo {
+            font-size: 1.8em;
+            color: var(--nav-footer-text-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform var(--transition-speed);
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            position: relative;
+            width: 30px;
+            height: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1010;
+        }
+
+        .nav-toggle span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--nav-footer-text-color);
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .nav-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .nav-toggle span:nth-child(2) {
+            top: 10px;
+            width: 70%;
+        }
+
+        .nav-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            top: 10px;
+            width: 0;
+            left: 50%;
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .nav-menu li {
+            margin-right: 1.5rem;
+            position: relative;
+        }
+
+        .nav-menu li a {
+            color: var(--nav-footer-text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu li a:hover {
+            background-color: var(--hover-bg-color);
+            color: #ffffff;
+        }
+
+        .nav-menu li a i {
+            margin-right: 8px;
+            transition: transform var(--transition-speed);
+        }
+
+        .nav-menu li a:hover i {
+            transform: translateY(-2px) rotate(10deg);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 80%;
+                max-width: 320px;
+                height: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 3rem 2rem;
+                transform: translateX(-100%);
+                transition: transform var(--transition-speed) ease-in-out;
+                z-index: 1000;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+                width: 100%;
+            }
+
+            .nav-menu li a {
+                font-size: 1.2em;
+                width: 100%;
+            }
+        }
+
+        main {
+            padding-top: 100px;
+            min-height: calc(100vh - 160px);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--nav-footer-text-color);
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        footer p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--nav-footer-text-color);
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            font-size: 1.5em;
+            display: none;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .back-to-top i {
+            vertical-align: middle;
+        }
+
+        .background-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .background-image {
+                object-position: center;
+            }
+        }
+
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .spinner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(26, 115, 232, 0.3);
+            border-radius: 50%;
+            border-top-color: #1a73e8;
+            animation: spin 1s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="spinner"></div>
+    </div>
+    <!-- Rest of your body content -->
+     <div class="background-images">
+        {% for bg_image in background_images %}
+            <img src="{{ bg_image.image.url }}" alt="Background" class="background-image" {% if forloop.first %}style="opacity: 1;"{% endif %}>
+        {% endfor %}
+    </div>
+    <header>
+        <div class="nav-logo">Githumu High</div>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+            
+        </button>
+        <ul class="nav-menu">
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="{% url 'administration' %}"><i class="fas fa-users-cog"></i> Administration</a></li>
+            <li><a href="{% url 'teaching_staff' %}"><i class="fas fa-chalkboard-teacher"></i> Teaching Staff</a></li>
+            <li><a href="{% url 'gallery' %}"><i class="fas fa-images"></i> Gallery</a></li>
+            <li><a href="{% url 'achievements' %}"><i class="fas fa-trophy"></i> Achievements</a></li>
+            <li><a href="{% url 'keys' %}"><i class="fas fa-book"></i> Academics</a></li>
+
+        </ul>
+    </header>
+
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <a href="#" class="back-to-top" id="backToTopBtn">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+        <div class="container">
+            <p>&copy; 2024 Githumu High School. All rights reserved.</p>
+        </div>
+    </footer>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const header = document.querySelector('header');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu li a');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        let lastScrollTop = 0;
+
+        // Scroll effect for header
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.scrollY;
+
+            // Hide header on scroll down and show on scroll up
+            if (scrollTop > lastScrollTop) {
+                header.style.top = '-100px';  // Adjust this value based on your header height
+            } else {
+                header.style.top = '0';
+            }
+
+            lastScrollTop = scrollTop;
+
+            // Show/hide back to top button
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+                backToTopBtn.style.display = 'block';
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.transform = 'translateY(0)';
+            } else {
+                header.classList.remove('scrolled');
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.transform = 'translateY(20px)';
+            }
+        });
+
+        // Mobile menu toggle
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Hover effect for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', (e) => {
+                const icon = e.target.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'translateY(-2px) rotate(10deg)';
+                }
+            });
+
+            link.addEventListener('mouseleave', (e) => {
+                const icon = e.target.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'translateY(0) rotate(0)';
+                }
+            });
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for nav links and back to top button
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backgroundImages = document.querySelectorAll('.background-image');
+            let currentIndex = 0;
+
+            function changeBackground() {
+                backgroundImages[currentIndex].style.opacity = '0';
+                currentIndex = (currentIndex + 1) % backgroundImages.length;
+                backgroundImages[currentIndex].style.opacity = '1';
+            }
+
+            setInterval(changeBackground, 10000); // Change every 10 seconds
+        });
+    </script>
+    <script>
+    // ... existing scripts ...
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const spinnerOverlay = document.getElementById('spinnerOverlay');
+
+        function showSpinner() {
+            spinnerOverlay.classList.add('active');
+        }
+
+        function hideSpinner() {
+            spinnerOverlay.classList.remove('active');
+        }
+
+        // Show spinner when starting to navigate away from the page
+        window.addEventListener('beforeunload', showSpinner);
+
+        // Hide spinner when the page has finished loading
+        window.addEventListener('load', hideSpinner);
+
+        // For dynamic content loading (e.g., AJAX requests)
+        // You can call showSpinner() before making the request and hideSpinner() after it completes
+    });
+</script>
+
+
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

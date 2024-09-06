@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revision Materials - Githumu High School</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-color: #007cb2;
+            --secondary-color: #2d9348;
+            --card-color: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: underline;
+        }
+
+        .search-form {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        select, button {
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            padding: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        select {
+            background-color: #f1f3f4;
+            color: var(--text-color);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 12px auto;
+        }
+
+        select:hover, select:focus {
+            background-color: #e8f0fe;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            min-width: 120px;
+        }
+
+        button:hover {
+            background-color: #1558d6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .material-item {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .material-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .material-item h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .material-item p {
+            color: #5f6368;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .download-btn {
+            background-color: var(--secondary-color);
+            color: blue;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background-color: #2d9348;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pagination a, .pagination span {
+            color: var(--primary-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: 1px solid #dfe1e5;
+            margin: 0 4px 8px 4px;
+            border-radius: 4px;
+        }
+
+        .pagination a:hover {
+            background-color: #e8f0fe;
+        }
+
+        .pagination .current-page {
+            background-color: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .search-form {
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .material-item {
+                padding: 15px;
+            }
+
+            .material-item h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="section" id="revision-materials">
+            <h2>Revision Materials</h2>
+            <form action="{% url 'revision_materials' %}" method="get" class="search-form">
+                <select name="year">
+                    <option value="">Select Year</option>
+                    {% for year in years %}
+                        <option value="{{ year.year }}">{{ year.year }}</option>
+                    {% endfor %}
+                </select>
+                <select name="term">
+                    <option value="">Select Term</option>
+                    {% for term in terms %}
+                        <option value="{{ term.id }}">{{ term.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="grade">
+                    <option value="">Select Form</option>
+                    {% for grade in grades %}
+                        <option value="{{ grade.id }}">{{ grade.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="subject">
+                    <option value="">Select Subject</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn">Search</button>
+            </form>
+            <div class="materials-grid">
+                {% for material in page_obj %}
+                    <div class="material-item">
+                        <h3>{{ material.title }}</h3>
+                        <p>{{ material.subject }} - {{ material.grade }} - {{ material.year }} - {{ material.term }}</p>
+                        <a href="{{ material.file.url }}" class="download-btn" download>
+                            Download
+                        </a>
+                    </div>
+                {% empty %}
+                    <p>No revision materials found.</p>
+                {% endfor %}
+            </div>
+            {% if page_obj.has_other_pages %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <span class="current-page">{{ num }}</span>
+                        {% else %}
+                            <a href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Assignments - Githumu High School</title>
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #007aff;
+            --background-color: #f5f5f7;
+            --text-color: #222;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Roboto', 'Arial', sans-serif;
+            background: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 0 0 20px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form input[type="text"] {
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 20px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-form input[type="text"]:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            font-size: 16px;
+            color: #fff;
+            background-color: var(--secondary-color);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #005c99;
+            transform: scale(1.03);
+        }
+
+        .assignments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .assignment-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .assignment-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .assignment-item h3 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin: 0 0 20px;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .download-btn:hover {
+            color: #005c99;
+        }
+
+        @media (max-width: 768px) {
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .search-form input[type="text"],
+            .btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .assignment-item h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section h2 {
+                font-size: 1.6em;
+            }
+
+            .search-form input[type="text"],
+            .btn {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .assignments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .assignment-item h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="section" id="holiday-assignments">
+            <h2>Holiday Assignments</h2>
+            <form action="{% url 'search' %}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Search assignments..." required>
+                <button type="submit" class="btn"><i class="fas fa-search icon"></i>Search</button>
+            </form>
+            <div class="assignments-grid">
+                {% for assignment in assignments %}
+                    <div class="assignment-item">
+                        <h3>Assignments for {{ assignment.title }}</h3>
+                        <a href="{% url 'grades' assignment.id %}" class="download-btn">
+                            <i class="fas fa-download icon"></i>Navigate to Resource
+                        </a>
+                    </div>
+                {% empty %}
+                    <p>No holiday assignments available for this year.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>

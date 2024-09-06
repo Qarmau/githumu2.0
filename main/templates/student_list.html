@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students in {{ stream.name }} Stream</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      .letterhead {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .letterhead h2 {
+        font-size: 32px;
+        color: #007aff;
+        margin: 0;
+        font-weight: 600;
+      }
+
+      .letterhead p {
+        font-size: 16px;
+        color: #666;
+        margin: 5px 0;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 26px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007aff;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      td {
+        font-size: 14px;
+        color: #555;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      /* Action Links */
+      .action-link {
+        text-decoration: none;
+        background-color: #007aff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        margin-right: 10px; /* Space between links */
+      }
+
+      .actions a {
+        text-decoration: none;
+        background-color: #007aff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+      }
+
+      .actions a:hover {
+        background-color: #0056c1;
+      }
+
+      /* Dropdown Container */
+      .download-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Button */
+      .download-button {
+        background-color: #007aff;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-align: center;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .download-button:hover {
+        background-color: #0056c1;
+      }
+
+      /* Dropdown Options */
+      .download-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        margin-top: 8px;
+        z-index: 1;
+        width: 200px;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .download-container:hover .download-options,
+      .download-options.open {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .download-options label {
+        padding: 12px 16px;
+        display: block;
+        cursor: pointer;
+        text-align: left;
+        font-size: 14px;
+        color: #333;
+        transition: background-color 0.2s ease;
+      }
+
+      .download-options label:hover {
+        background-color: #f1f1f1;
+      }
+
+      .download-options input {
+        margin-right: 10px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .letterhead h2 {
+          font-size: 28px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .actions a {
+          font-size: 12px;
+          padding: 8px 16px;
+        }
+
+        .download-button {
+          padding: 8px 16px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- School Letterhead -->
+      <div class="letterhead">
+        <h2>Githumu High School</h2>
+        <p>P.O BOX 468-01000, THIKA</p>
+        <p>Phone: +254 701 234 5679 | Email: info@githumuhigh.edu</p>
+      </div>
+
+      <!-- Title -->
+      <h1>Students in Form {{ grade.name }} {{ stream.name }}</h1>
+
+      <!-- Actions: Back to Streams & Download -->
+      <div class="actions">
+        <a href="{% url 'stream_list' stream.grade.id %}" class="action-link"
+          ><i class="fas fa-arrow-left icon"></i>Back</a
+        >
+
+        <a
+          href="{% url 'upload_students' grade_id=grade.id stream_id=stream.id %}"
+          class="action-link"
+          >Upload Students</a
+        >
+
+        <div class="download-container">
+          <button class="download-button" id="download-btn">
+            Download List
+          </button>
+          <div class="download-options" id="dropdown-options">
+            <label>
+              <input type="radio" name="format" value="xlsx" checked />
+              Spreadsheet (XLSX)
+            </label>
+            <label>
+              <input type="radio" name="format" value="pdf" />
+              PDF
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Table -->
+      {% if students %}
+      <table>
+        <thead>
+          <tr>
+            <th>Admission Number</th>
+            <th>Name</th>
+            <th>KCPE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>{{ student.admission_number }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.kcpe }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No students are currently enrolled in this class.</p>
+      {% endif %}
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const downloadButton = document.getElementById("download-btn");
+        const dropdownOptions = document.getElementById("dropdown-options");
+        const radios = document.querySelectorAll(
+          '.download-options input[type="radio"]'
+        );
+
+        downloadButton.addEventListener("click", function () {
+          // Toggle dropdown visibility
+          dropdownOptions.classList.toggle("open");
+        });
+
+        dropdownOptions.addEventListener("click", function (event) {
+          if (event.target.tagName === "LABEL") {
+            const selectedFormat = event.target.querySelector("input").value;
+
+            if (selectedFormat) {
+              // Create a form to submit the selected format
+              const form = document.createElement("form");
+              form.method = "POST";
+              form.action = "{% url 'download_students' stream.id %}";
+
+              // Add CSRF token
+              const csrfToken = document.createElement("input");
+              csrfToken.type = "hidden";
+              csrfToken.name = "csrfmiddlewaretoken";
+              csrfToken.value = "{{ csrf_token }}";
+              form.appendChild(csrfToken);
+
+              // Add selected format
+              const formatInput = document.createElement("input");
+              formatInput.type = "hidden";
+              formatInput.name = "format";
+              formatInput.value = selectedFormat;
+              form.appendChild(formatInput);
+
+              document.body.appendChild(form);
+              form.submit();
+            }
+          }
+        });
+
+        // Close dropdown if clicking outside
+        document.addEventListener("click", function (event) {
+          if (
+            !downloadButton.contains(event.target) &&
+            !dropdownOptions.contains(event.target)
+          ) {
+            dropdownOptions.classList.remove("open");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

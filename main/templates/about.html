@@ -1,0 +1,430 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - Githumu High School{% endblock %}
+
+{% block content %}
+<section id="about-intro">
+    <h3>About Githumu High School</h3>
+</section>
+
+<section id="history">
+    <h2>History of A.I.C Githumu High School</h2>
+    <p>A.I.C Githumu High School, located in Ruchu, Murang’a County, was established in the 1950s by the African Inland Church. Initially founded as a primary school, it quickly became a cornerstone of education within the local community, embodying the vision of providing comprehensive learning experiences based on Christian principles.</p>
+    <p>By 1963, the school expanded its facilities and curriculum to accommodate secondary education, welcoming its first cohort of 35 boys. Within three years, the school embraced a co-educational model by enrolling 40 girls, marking a significant milestone in its development as an inclusive academic institution.</p>
+    <p>In subsequent years, Githumu High School reverted to an all-boys model, reflecting a shift in educational strategies and community needs. It continued to grow in both student population and infrastructure, transforming into a modern educational establishment with the capacity to host close to 2,000 boys. This evolution has ensured that the school remains a prominent feature in the local education landscape.</p>
+    <p>Today, Githumu High School stands as a testament to its enduring legacy and commitment to academic and co-curricular excellence. Its proximity to the Aberdare Ranges adds to the school’s unique character, with the chilly climate becoming a distinctive aspect of the student experience.</p>
+</section>
+
+<section id="population">
+    <h2>Population</h2>
+    <p><strong>{{ about.population }}</strong> students</p>
+</section>
+
+<section id="subjects">
+    <div class="subjects-container">
+        <h2>School Motto</h2>
+        <div class="subjects-container">
+            <p>{{ about.school_motto }} <img src="{% static 'eagle.jpg' %}" alt="Eagle" class="eagle-icon"></p>
+        </div>
+        <h2>Vision</h2>
+        <p>{{ about.vision }}</p>
+        <h2>Mission</h2>
+        <p>{{ about.mission }}</p>
+    </div>
+</section>
+
+<section id="subjects">
+    <h2>Subjects Offered</h2>
+    <div class="subjects-container">
+        <ul>
+            <li>Mathematics</li>
+            <li>English</li>
+            <li>Kiswahili</li>
+            <li>Biology</li>
+            <li>Chemistry</li>
+            <li>Physics</li>
+            <li>Geography</li>
+            <li>History and Government</li>
+            <li>Business Studies</li>
+            <li>Computer Studies</li>
+            <li>Physical Education</li>
+            <li>Religious Education</li>
+            <li>Home Science</li>
+        </ul>
+    </div>
+</section>
+
+<section id="clubs">
+    <div class="clubs-container">
+        <h2>Clubs</h2>
+        <ul>
+            <li>Debate Club</li>
+            <li>Drama Club</li>
+            <li>Science Club</li>
+            <li>Environmental Club</li>
+            <li>Music Club</li>
+            <li>St. John Ambulance</li>
+            <li>Sports Club</li>
+            <li>Mathematics Club</li>
+        </ul>
+        <h2>Societies</h2>
+        <ul>
+            <li>Christian Union (CU)</li>
+            <li>Scouting</li>
+            <li>Catholic Association (CA)</li>
+            <li>Red Cross</li>
+        </ul>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact-container">
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+
+            {{ about.contact_information|linebreaks }}
+            <br/>
+
+<section id="call-us">
+    <div class="call-us-container">
+        <i class="fas fa-phone-alt call-icon"></i>
+        <div class="call-details">
+            <h3>Need Assistance?</h3>
+            <p>Call us at</p>
+            <a href="tel:+2547092935783" class="call-us-link">
+                <strong>{{about.phone_number}}</strong>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+        </div>
+
+        <div class="email-form">
+            <h3>Send us an email</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Your Name</label>
+                    <input type="text" name="name" id="id_name" placeholder="FULL NAME" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Your Email Address</label>
+                    <input type="email" name="email" id="id_email" placeholder="myemail@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_message">Your Message</label>
+                    <textarea name="message" id="id_message" placeholder="Write Your Message Here" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="map">
+    <h2>Location</h2>
+    <div id="google-map"></div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: #e3f2fd; /* Light Blue Background */
+        color: #333;
+    }
+
+    /* Section Styling */
+    section {
+        margin: 40px 0;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    #about-intro {
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(to right, #b3e5fc, #e1f5fe); /* Light Blue Gradient */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #about-intro h3 {
+        font-size: 2.5em;
+        color: #0288d1; /* Darker Blue */
+        margin: 0;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    #about-intro h3::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #01579b; /* Darker Blue */
+        margin: 10px auto 0;
+        border-radius: 5px;
+    }
+
+    /* History Section Styling */
+    #history {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        color: #333;
+    }
+
+    #history h2 {
+        font-size: 2em;
+        color: #0288d1; /* Darker Blue */
+        margin-bottom: 20px;
+    }
+
+    #history p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    /* Population Section Styling */
+    #population {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+    }
+
+    #population h2 {
+        font-size: 2em;
+        color: #0288d1; /* Darker Blue */
+        margin-bottom: 10px;
+    }
+
+    #population p {
+        font-size: 1.5em;
+        color: #01579b; /* Darker Blue */
+    }
+
+    /* Motto, Vision, Mission Section Styling */
+    #motto-vision-mission {
+        background: #b3e5fc; /* Light Blue */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 40px 0;
+    }
+
+    #motto-vision-mission h2 {
+        font-size: 2em;
+        color: #0288d1; /* Darker Blue */
+        margin-bottom: 10px;
+    }
+
+    #motto-vision-mission p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .motto-content p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2em;
+        color: #01579b; /* Darker Blue */
+    }
+
+    .eagle-icon {
+        width: 30px;
+        height: auto;
+        margin-left: 10px;
+    }
+
+
+    /* Subjects and Clubs Sections Styling */
+    .subjects-container, .clubs-container {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .subjects-container h2, .clubs-container h2 {
+        font-size: 2em;
+        color: #0288d1; /* Darker Blue */
+        margin-bottom: 10px;
+    }
+
+    .subjects-container ul, .clubs-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .subjects-container li, .clubs-container li {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Contact Section Styling */
+    #contact {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .contact-info h3, .email-form h3 {
+        color: #0288d1; /* Darker Blue */
+    }
+
+/* Call Us Section Styling */
+#call-us {
+    background: #1a237e; /* Primary Color */
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.call-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.call-icon {
+    font-size: 3em;
+    color: #ffd700; /* Secondary Color */
+    margin-bottom: 15px;
+}
+
+.call-details h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.call-details p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.call-us-link {
+    font-size: 1.5em;
+    color: #ffd700; /* Secondary Color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.call-us-link:hover {
+    text-decoration: underline;
+}
+
+
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #0288d1; /* Darker Blue */
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .submit-btn {
+        background: #0288d1; /* Darker Blue */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background: #01579b; /* Even Darker Blue */
+    }
+
+    /* Map Section Styling */
+    #map {
+        text-align: center;
+    }
+
+    #google-map {
+        height: 400px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvpQsAPtuiszSQTryQV7Jq-irM12KCGUA&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        var location = {lat: -0.8280, lng: 36.9141}; // Corrected format for coordinates
+        var map = new google.maps.Map(document.getElementById('google-map'), {
+            zoom: 15,
+            center: location,
+            styles: [
+                { "elementType": "geometry", "stylers": [{ "color": "#e3f2fd" }] },
+                { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
+                { "elementType": "labels.text.fill", "stylers": [{ "color": "#0288d1" }] },
+                { "elementType": "labels.text.stroke", "stylers": [{ "color": "#e3f2fd" }] },
+                { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{ "color": "#b3e5fc" }] },
+                { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#b3e5fc" }] },
+                { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{ "color": "#0288d1" }] },
+                { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }] },
+                { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#d3d3d3" }] },
+                { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#0288d1" }] },
+                { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#e3f2fd" }] },
+                { "featureType": "transit.station", "elementType": "labels.text.fill", "stylers": [{ "color": "#0288d1" }] },
+                { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#b3e5fc" }] },
+                { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "color": "#0288d1" }] }
+            ]
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const callLink = document.querySelector('.call-us-link');
+
+    callLink.addEventListener('click', (event) => {
+        if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            const userConfirmed = confirm('Do you want to call us?');
+            if (!userConfirmed) {
+                event.preventDefault(); // Prevent the call if the user cancels
+            }
+        }
+    });
+});
+</script>
+
+{% endblock %}

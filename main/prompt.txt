@@ -1,0 +1,8 @@
+i want you to create two extra buttons(upload past paper, upload revision material), next to create holiday assignment button on the holiday_assignments.html.
+IT SHOULD LEAD TO THE 2 RESPECTIVE PAGES WHERE USERS UPLOAD THE FILES.this ones created should be connected to the models PastPaper and RevisionMaterial.
+
+the forms created should be consistent with the models.
+
+only logged in user can do this.
+
+style the two pages created to be consistent with the holiday_assignments.html

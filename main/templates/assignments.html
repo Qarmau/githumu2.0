@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Assignments - Githumu High School</title>
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #ffd700;
+            --background-color: #f5f5f7;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --card-border: #e0e0e0;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --max-width: 1200px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Arial', sans-serif;
+            background: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        #assignments {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 0 auto 30px;
+            max-width: var(--max-width);
+            box-shadow: 0 4px 10px var(--card-shadow);
+            text-align: center;
+        }
+
+        #assignments h2 {
+            margin: 0;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .assignments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .assignment-card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .assignment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px var(--card-hover-shadow);
+        }
+
+        .download-btn {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .download-btn:hover {
+            color: #005c99;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .no-assignments {
+            padding: 20px;
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px var(--card-shadow);
+            text-align: center;
+            color: var(--text-color);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-color);
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            #assignments h2 {
+                font-size: 2em;
+            }
+
+            .assignment-card h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #assignments h2 {
+                font-size: 1.6em;
+            }
+
+            .assignment-card h3 {
+                font-size: 1.2em;
+            }
+
+            .assignments-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="assignments">
+        <h2>Assignments for Form {{ assignment.grade }} - {{ assignment.title }} {{ assignment.year }}</h2>
+
+        {% if related_assignments %}
+        <div class="assignments-list">
+            {% for related_assignment in related_assignments %}
+            <div class="assignment-card">
+                <h3>{{ related_assignment.subject }}</h3>
+                <p><strong>Uploaded on:</strong> {{ related_assignment.date_uploaded }}</p>
+                <a href="{% url 'download_assignment' related_assignment.id %}" class="download-btn">
+                    Download {{ related_assignment.subject }} Assignment
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-assignments">No assignments available for this grade, year, and title.</p>
+        {% endif %}
+    </section>
+</body>
+</html>

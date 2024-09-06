@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <div id="profile-fields">
+        {{ profile_form.as_p }}
+    </div>
+    <button type="submit">Save</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const userTypeSelect = document.querySelector('#id_user_type');
+    const profileFields = document.querySelector('#profile-fields');
+
+    function updateProfileFields() {
+        const userType = userTypeSelect.value;
+        if (userType === 'teacher') {
+            profileFields.innerHTML = '{{ teacher_profile_form.as_p }}';
+        } else {
+            profileFields.innerHTML = '{{ admin_profile_form.as_p }}';
+        }
+    }
+
+    userTypeSelect.addEventListener('change', updateProfileFields);
+    updateProfileFields();
+});
+</script>
+{% endblock %}

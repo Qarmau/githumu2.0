@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Achievements - Githumu High School{% endblock %}
+
+{% block content %}
+<section id="achievements-header">
+    <h3>Achievements</h3>
+</section>
+
+<section id="university-admissions">
+    <h2>University Admission Rates</h2>
+    <canvas id="admission-rate-graph"></canvas>
+</section>
+
+<section id="co-curricular-awards">
+    <h2>Co-Curricular Awards</h2>
+    <div class="award-grid">
+        {% for award in awards %}
+        <div class="award-card">
+            <img src="{{ award.photo.url }}" alt="{{ award.title }}">
+            <h3>{{ award.title }}</h3>
+            <p>Year: {{ award.year }}</p>
+            <p>{{ award.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    /* Centering and Styling the Achievements Header Section */
+    #achievements-header {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    #achievements-header h3 {
+        font-size: 2.5em;
+        color: #0288d1; /* Light Blue */
+        margin: 0;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    #achievements-header h3::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #01579b; /* Darker Blue */
+        margin: 10px auto 0;
+        border-radius: 5px;
+    }
+
+    /* University Admissions Section Styling */
+    #university-admissions {
+        text-align: center;
+        padding: 40px 20px;
+        background: #f1f8fd; /* Light Blue Background */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    /* Co-Curricular Awards Section Styling */
+    #co-curricular-awards {
+        padding: 40px 20px;
+        background: #f9f9f9; /* Very Light Gray */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 1200px;
+    }
+
+    .award-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .award-card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .award-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .award-card img {
+        border-radius: 8px;
+        width: 150px; /* Adjusted width */
+        height: auto; /* Maintain aspect ratio */
+        margin-bottom: 15px;
+    }
+
+    .award-card h3 {
+        font-size: 1.5em;
+        color: #0288d1; /* Light Blue */
+        margin: 0;
+    }
+
+    .award-card p {
+        font-size: 1em;
+        color: #555;
+    }
+</style>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('admission-rate-graph').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for admission in university_admissions %}'{{ admission.year }}',{% endfor %}],
+            datasets: [{
+                label: 'University Admission Rate',
+                data: [{% for admission in university_admissions %}{{ admission.university_admission_rate }},{% endfor %}],
+                borderColor: '#0288d1', /* Light Blue */
+                backgroundColor: 'rgba(2, 136, 209, 0.2)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

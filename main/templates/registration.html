@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Githumu High School</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .registration-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .registration-box {
+            background-color: white;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .registration-box:hover {
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #0070c9;
+            margin-bottom: 40px;
+            letter-spacing: -0.05em;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #444;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: border 0.3s ease;
+            color: #333;
+        }
+
+        input:focus, select:focus {
+            border-color: #0070c9;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 112, 201, 0.15);
+        }
+
+        input.is-invalid, select.is-invalid {
+            border-color: #e74c3c;
+        }
+
+        .form-group .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #0070c9;
+            cursor: pointer;
+        }
+
+        .form-group .password-toggle:hover {
+            color: #005bb5;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+
+        .global-error-message {
+            background-color: #fce4e4;
+            color: #e74c3c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color: #0070c9;
+            color: white;
+            padding: 16px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #005bb5;
+        }
+
+        button[type="submit"]:active {
+            background-color: #003f7f;
+        }
+
+        #profile-fields {
+            margin-top: 20px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .registration-box {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            button[type="submit"] {
+                padding: 14px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="registration-container">
+        <div class="registration-box">
+            <h1>Sign Up</h1>
+
+            <!-- Display form-wide errors here -->
+            {% if form.non_field_errors %}
+            <div class="global-error-message">
+                <ul>
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    {{ user_form.username.label_tag }}
+                    {{ user_form.username }}
+                    {% if user_form.username.errors %}
+                    <span class="error-message">{{ user_form.username.errors|striptags }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ user_form.email.label_tag }}
+                    {{ user_form.email }}
+                    {% if user_form.email.errors %}
+                    <span class="error-message">{{ user_form.email.errors|striptags }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ user_form.password1.label_tag }}
+                    <div class="form-group" style="position: relative;">
+                        {{ user_form.password1 }}
+                        <span class="password-toggle" onclick="togglePasswordVisibility('id_password1')">&#x1F441;</span>
+                        {% if user_form.password1.errors %}
+                        <span class="error-message">{{ user_form.password1.errors|striptags }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ user_form.password2.label_tag }}
+                    <div class="form-group" style="position: relative;">
+                        {{ user_form.password2 }}
+                        <span class="password-toggle" onclick="togglePasswordVisibility('id_password2')">&#x1F441;</span>
+                        {% if user_form.password2.errors %}
+                        <span class="error-message">{{ user_form.password2.errors|striptags }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ user_form.user_type.label_tag }}
+                    {{ user_form.user_type }}
+                    {% if user_form.user_type.errors %}
+                    <span class="error-message">{{ user_form.user_type.errors|striptags }}</span>
+                    {% endif %}
+                </div>
+
+                <div id="profile-fields" class="form-group"></div>
+
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userTypeSelect = document.querySelector('#id_user_type');
+            const profileFields = document.querySelector('#profile-fields');
+
+            const administratorProfileFields = `{{ administrator_profile_form.as_p|escapejs }}`;
+            const teacherProfileFields = `{{ teacher_profile_form.as_p|escapejs }}`;
+
+            function updateProfileFields() {
+                const userType = userTypeSelect.value;
+                if (userType === 'administrator') {
+                    profileFields.innerHTML = administratorProfileFields;
+                } else if (userType === 'teacher') {
+                    profileFields.innerHTML = teacherProfileFields;
+                } else {
+                    profileFields.innerHTML = '';
+                }
+            }
+
+            userTypeSelect.addEventListener('change', updateProfileFields);
+            updateProfileFields();  // Initialize on page load
+        });
+
+        function togglePasswordVisibility(passwordFieldId) {
+            const passwordField = document.getElementById(passwordFieldId);
+            const passwordToggle = passwordField.nextElementSibling;
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                passwordToggle.innerHTML = "&#x1F441;";
+            } else {
+                passwordField.type = "password";
+                passwordToggle.innerHTML = "&#x1F441;";
+            }
+        }
+    </script>
+</body>
+</html>

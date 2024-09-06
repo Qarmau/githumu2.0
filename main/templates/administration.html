@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Administration - Githumu High School{% endblock %}
+
+{% block content %}
+<section id="administration">
+    <h3>Administration</h3>
+</section>
+
+<div class="admin-grid">
+    {% for admin in administrators %}
+    <div class="admin-card">
+        <img src="{{ admin.photo.url }}" alt="{{ admin.name }}">
+        <h3>{{ admin.title|title }}. {{ admin.name|title }}</h3>
+        <h4>{{ admin.role|title }}</h4>
+        {% if admin.subjects %}
+        <h5>Subjects: {{ admin.subjects }}</h5>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Centering and Styling the Administration Section */
+    #administration {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    #administration h3 {
+        font-size: 2.5em;
+        color: #0288d1; /* Light Blue */
+        margin: 0;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    #administration h3::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #01579b; /* Darker Blue */
+        margin: 10px auto 0;
+        border-radius: 5px;
+    }
+
+    /* Admin Grid Styling */
+    .admin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .admin-card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .admin-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .admin-card h3 {
+        font-size: 1.5em;
+        color: #0288d1; /* Light Blue */
+        margin: 0;
+    }
+
+    .admin-card h4 {
+        font-size: 1.2em;
+        color: #01579b; /* Darker Blue */
+        margin: 5px 0;
+    }
+
+    .admin-card h5 {
+        font-size: 1em;
+        color: #555;
+    }
+</style>
+{% endblock %}

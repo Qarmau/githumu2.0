@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Stream</title>
+    <style>
+        /* General body style */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container styling */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Header style */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            color: #333;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        /* Stream list layout */
+        .streams-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stream-item {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1 1 calc(33.333% - 20px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .stream-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            background-color: #f9f9f9;
+        }
+
+        .stream-item a {
+            text-decoration: none;
+            color: #007aff;
+            font-size: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .stream-item a:hover {
+            color: #0051a2;
+        }
+
+        .stream-item a:focus {
+            outline: 2px solid #007aff;
+            
+            outline-offset: 4px;
+        }
+
+        /* Back link style */
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            font-size: 18px;
+            color: #007aff;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #0051a2;
+            border-bottom: 1px solid #007aff;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media queries for responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .stream-item {
+                flex: 1 1 100%;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .stream-item a {
+                font-size: 18px;
+            }
+
+            .back-link {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Select a Stream in Form {{ grade.name }}</h1>
+            <p>Choose the stream to view its students.</p>
+        </div>
+
+        <!-- Streams Section -->
+        <div class="streams-container">
+            {% for stream in streams %}
+            <div class="stream-item">
+                <a href="{% url 'student_list' stream.id %}">
+                    Form {{ grade.name }} {{ stream.name }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Back link -->
+        <a href="{% url 'grade_list' %}" class="back-link">Back</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const streamLinks = document.querySelectorAll('.stream-item a');
+
+            streamLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default navigation
+                    const url = this.getAttribute('href');
+
+                    // Display loading message
+                    const loadingMessage = document.createElement('div');
+                    loadingMessage.textContent = 'Loading...';
+                    loadingMessage.style.position = 'fixed';
+                    loadingMessage.style.top = '50%';
+                    loadingMessage.style.left = '50%';
+                    loadingMessage.style.transform = 'translate(-50%, -50%)';
+                    loadingMessage.style.backgroundColor = '#fff';
+                    loadingMessage.style.padding = '20px';
+                    loadingMessage.style.borderRadius = '10px';
+                    loadingMessage.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+                    loadingMessage.style.fontSize = '18px';
+                    loadingMessage.style.color = '#007aff';
+                    loadingMessage.style.zIndex = '1000';
+                    document.body.appendChild(loadingMessage);
+
+                    setTimeout(() => {
+                        document.body.removeChild(loadingMessage);
+                        window.location.href = url;
+                    }, 800); // Adjust the delay as needed
+                });
+            });
+        });
+    </script>
+</body>
+</html>
