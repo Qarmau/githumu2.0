@@ -1,0 +1,155 @@
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/githumu_high_school/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /streams/3/students/ HTTP/1.1" 200 8202
+"GET /grades/1/streams/ HTTP/1.1" 200 7021
+"GET /streams/4/students/ HTTP/1.1" 200 16376
+"POST /streams/4/download/ HTTP/1.1" 200 7526
+"POST /streams/4/download/ HTTP/1.1" 200 6953
+"GET /grades/1/streams/ HTTP/1.1" 200 7021
+"GET /grades/ HTTP/1.1" 200 6456
+"GET /grades/4/streams/ HTTP/1.1" 200 6857
+"GET /streams/24/students/ HTTP/1.1" 200 8204
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /streams/24/students/ HTTP/1.1" 200 8204
+"POST /admin/main/student/ HTTP/1.1" 200 22223
+"POST /admin/main/student/ HTTP/1.1" 302 0
+"GET /admin/main/student/ HTTP/1.1" 200 13008
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /grades/4/streams/ HTTP/1.1" 200 6857
+"GET /grades/ HTTP/1.1" 200 6456
+"GET /grades/1/streams/ HTTP/1.1" 200 7021
+"GET /streams/4/students/ HTTP/1.1" 200 8202
+"GET /grades/1/streams/4/upload/ HTTP/1.1" 200 3201
+"POST /grades/1/streams/4/upload/ HTTP/1.1" 302 0
+"GET /streams/4/students/ HTTP/1.1" 200 16376
+"POST /streams/4/download/ HTTP/1.1" 200 6953
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/john/Downloads/home/githumuhigh/githumu-1.0/githumu/githumu_high_school/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26079
+"GET /media/background_images/1000034368.jpg HTTP/1.1" 200 114212
+"GET /media/background_images/1000029433.jpg HTTP/1.1" 200 121462
+"GET /static/css/style.css HTTP/1.1" 200 12009
+"GET /media/news_images/comingSoon.jpeg HTTP/1.1" 200 2732
+"GET /media/news_images/tropphy_Oxs4VSq.jpeg HTTP/1.1" 200 10755
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
+"GET /media/EVENT_images/luxury_campus.jpg HTTP/1.1" 200 29888
+"GET /media/EVENT_images/edu3.jpeg HTTP/1.1" 200 12257
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 10020
+"GET /keys/ HTTP/1.1" 200 8937
+"GET /static/images/luxury_campus.jpg HTTP/1.1" 404 1831
+"GET /accounts/login/ HTTP/1.1" 200 5002
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET /holiday-assignments/ HTTP/1.1" 200 4459
+"GET /mini_dashboard/ HTTP/1.1" 200 5925
+"GET /grades/ HTTP/1.1" 200 6456
+"GET / HTTP/1.1" 200 26079
+"GET /static/css/style.css HTTP/1.1" 304 0
+"GET /media/background_images/1000029433.jpg HTTP/1.1" 304 0
+"GET /media/background_images/1000034368.jpg HTTP/1.1" 304 0
+"GET /media/news_images/comingSoon.jpeg HTTP/1.1" 200 2732
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
+"GET /media/news_images/tropphy_Oxs4VSq.jpeg HTTP/1.1" 200 10755
+"GET /media/EVENT_images/luxury_campus.jpg HTTP/1.1" 200 29888
+"GET /media/EVENT_images/edu3.jpeg HTTP/1.1" 200 12257
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 10020
+"GET /grades/1/streams/ HTTP/1.1" 200 7021
+"GET /streams/3/students/ HTTP/1.1" 200 8202
+"GET /streams/3/students/ HTTP/1.1" 302 0
+"GET /accounts/login/?next=/streams/3/students/ HTTP/1.1" 200 5002
+"GET /streams/4/students/ HTTP/1.1" 200 16376
+"GET /admin/main/ HTTP/1.1" 200 13260
+"GET /admin/main/student/ HTTP/1.1" 200 38919
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/main/student/ HTTP/1.1" 200 22301
+"POST /admin/main/student/ HTTP/1.1" 302 0
+"GET /admin/main/student/ HTTP/1.1" 200 13008
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET / HTTP/1.1" 200 26105
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
+"GET / HTTP/1.1" 200 26093
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
+"GET / HTTP/1.1" 200 26093
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
+"GET / HTTP/1.1" 200 26092
+"GET /static/images/luxury_campus.jpeg HTTP/1.1" 404 1834
